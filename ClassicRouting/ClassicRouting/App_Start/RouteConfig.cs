@@ -24,6 +24,9 @@ namespace ClassicRouting
                 url: "serial/{Capitalization}",
                 defaults: new { controller = "Home", action = "Serial", Capitalization = UrlParameter.Optional });
 
+
+            //This route uses a Regular expression to limit the input 
+            //on the parameter
             routes.MapRoute(name: "FeetToMeters",
                 url: "feettometers/{feetValue}",
                 defaults: new { controller = "Home", action = "FeetToMeters" },
