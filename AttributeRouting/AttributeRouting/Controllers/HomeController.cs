@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using AttributeRouting.CustomRouteConstraints;
 
 namespace AttributeRouting.Controllers
 {
@@ -12,7 +13,7 @@ namespace AttributeRouting.Controllers
     //routes I don't need to add anything to the method
     //For example, [server]/Home/Aboute works without attribute in the About method
     //The case of Home/Index is special as it has to map special cases
-    
+
     [RoutePrefix("Home")]
     [Route("{action}")]
     public class HomeController : Controller
@@ -72,10 +73,12 @@ namespace AttributeRouting.Controllers
         /// This Action is used to demo the usage of a Custom Constraint where the list of valid values for a parameter is provided. In this case, the allowed values for TempUnits are "celsius" and "fahrenheit", while the values allowed for PresUnits are "mmHg" and "hPa"
         /// The ActionResult simply returns a message stating the units chosen
         /// </summary>
-        /// <param name="UnidadesTemp"></param>
-        /// <param name="UnidadesPres"></param>
+        /// <param name="TempUnits">celsius and fahrenheit are the only allowed values</param>
+        /// <param name="PresUnits">mmHg and hPa are the only allowed values</param>
         /// <returns></returns>
-
+        //Watch out for any spaces in the middle of the route. Remove all of them
+        [Route("~/weather/{TempUnits:Value(celsius|fahrenheit)}/{PresUnits:Value(mmHg|hPa)}")]
+        //[Route("~/weather/{TempUnits=celsius}/{PresUnits=mmHg}")]
         public ActionResult Weather(string TempUnits,
             string PresUnits)
         {
