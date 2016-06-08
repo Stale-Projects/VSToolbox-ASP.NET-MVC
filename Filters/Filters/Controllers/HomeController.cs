@@ -11,6 +11,7 @@ namespace Filters.Controllers
     {
         public ActionResult Index()
         {
+            throw new StackOverflowException();
             return View();
         }
 
